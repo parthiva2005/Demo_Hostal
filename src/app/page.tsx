@@ -276,7 +276,7 @@ export default function HomePage() {
               initial={{ opacity: 0, x: 50, scale: 0.95 }}
               animate={{ opacity: 1, x: 0, scale: 1 }}
               transition={{ duration: 0.7, delay: 0.3 }}
-              className="relative hidden lg:flex lg:items-center lg:justify-center"
+              className="relative mt-12 flex lg:mt-0 lg:items-center lg:justify-center"
             >
               <div className="relative w-full max-w-md">
                 {/* Main card */}
