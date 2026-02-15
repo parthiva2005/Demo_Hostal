@@ -1,13 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Search, MapPin, ChevronRight, Star, Shield, Zap, Users, ArrowRight, Building2, CheckCircle2, Clock, CreditCard, Headphones, Quote, TrendingUp, Award, Heart } from "lucide-react";
+import { Search, MapPin, Star, Shield, Zap, Users, ArrowRight, Building2, CheckCircle2, CreditCard, Headphones, Quote, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
+import Image from "next/image";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import livingBackground from "./images/living-background.img.jpeg";
+import hydImg from "./images/hyd-img.jpeg";
+import puneImg from "./images/pune-img.jpeg";
 import { useState } from "react";
 
 const fadeUp = {
@@ -15,7 +19,7 @@ const fadeUp = {
   visible: (i: number = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.1, duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] },
+    transition: { delay: i * 0.1, duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const },
   }),
 };
 
@@ -24,11 +28,11 @@ const stagger = {
 };
 
 const cities = [
-  { name: "Hyderabad", pgs: 1240, image: "https://images.unsplash.com/photo-1572427401797-06e45e8648f1?w=400&h=300&fit=crop" },
+  { name: "Hyderabad", pgs: 1240, image: hydImg },
   { name: "Bangalore", pgs: 2180, image: "https://images.unsplash.com/photo-1596176530529-78163a4f7af2?w=400&h=300&fit=crop" },
   { name: "Mumbai", pgs: 1890, image: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=400&h=300&fit=crop" },
   { name: "Delhi", pgs: 1560, image: "https://images.unsplash.com/photo-1587474260584-136574528ed5?w=400&h=300&fit=crop" },
-  { name: "Pune", pgs: 980, image: "https://images.unsplash.com/photo-1625046441270-69e56e889f49?w=400&h=300&fit=crop" },
+  { name: "Pune", pgs: 980, image: puneImg },
   { name: "Chennai", pgs: 870, image: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=400&h=300&fit=crop" },
 ];
 
@@ -172,6 +176,18 @@ export default function HomePage() {
 
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-20 lg:pt-0">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+            <Image
+            src={livingBackground}
+            alt="Background"
+            fill
+            className="object-cover opacity-50"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/50 to-background" />
+        </div>
+
         {/* Background decoration */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <div className="absolute -right-40 -top-40 h-[500px] w-[500px] rounded-full bg-primary/5 blur-3xl" />
@@ -266,10 +282,11 @@ export default function HomePage() {
                 {/* Main card */}
                 <div className="relative overflow-hidden rounded-3xl border bg-card shadow-2xl shadow-primary/10">
                   <div className="relative h-64 bg-gradient-to-br from-primary/20 to-purple-500/20">
-                    <img
+                    <Image
                       src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&h=400&fit=crop"
                       alt="Beautiful PG room"
-                      className="h-full w-full object-cover"
+                      fill
+                      className="object-cover"
                     />
                     <div className="absolute left-4 top-4">
                       <Badge className="bg-green-500 text-white">Verified</Badge>
@@ -316,7 +333,6 @@ export default function HomePage() {
                     </div>
                     <div>
                       <p className="text-sm font-semibold">Booking Confirmed!</p>
-                      <p className="text-xs text-muted-foreground">Move-in: 15 Feb 2026</p>
                     </div>
                   </div>
                 </motion.div>
@@ -401,10 +417,11 @@ export default function HomePage() {
                   className="group relative block overflow-hidden rounded-2xl"
                 >
                   <div className="relative h-48 overflow-hidden">
-                    <img
+                    <Image
                       src={city.image}
                       alt={city.name}
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                     <div className="absolute bottom-4 left-4">
@@ -569,10 +586,11 @@ export default function HomePage() {
               >
                 <Link href="/pg/1">
                   <div className="relative h-52 overflow-hidden">
-                    <img
+                    <Image
                       src={pg.image}
                       alt={pg.name}
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                     <div className="absolute left-3 top-3 flex gap-2">
                       <Badge className="bg-green-500 text-white">Verified</Badge>
