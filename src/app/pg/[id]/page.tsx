@@ -4,8 +4,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   MapPin, Star, Heart, Share2, Shield, Wifi, UtensilsCrossed, Wind, Car, Dumbbell,
-  Tv, WashingMachine, ChevronLeft, ChevronRight, CheckCircle2, Clock, Calendar,
-  Phone, Mail, User, Building2, CreditCard, AlertCircle, Users, BedDouble, Bath, Info
+  Tv, WashingMachine, ChevronLeft, ChevronRight, CheckCircle2,
+  Phone, Mail, Info, CreditCard, AlertCircle
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -13,6 +13,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Progress } from "@/components/ui/progress";
 import Link from "next/link";
+import Image from "next/image";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 
@@ -111,16 +112,21 @@ export default function PGDetailPage() {
           <div className="relative overflow-hidden rounded-2xl">
             <div className="relative h-64 sm:h-96 lg:h-[500px]">
               <AnimatePresence mode="wait">
-                <motion.img
+                <motion.div
                   key={currentImage}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
-                  src={pgData.images[currentImage]}
-                  alt={pgData.name}
-                  className="h-full w-full object-cover"
-                />
+                  className="relative h-full w-full"
+                >
+                  <Image
+                    src={pgData.images[currentImage]}
+                    alt={pgData.name}
+                    fill
+                    className="object-cover"
+                  />
+                </motion.div>
               </AnimatePresence>
 
               <button onClick={prevImage} className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-white/80 p-2 backdrop-blur-sm transition-colors hover:bg-white">
@@ -167,7 +173,9 @@ export default function PGDetailPage() {
                 onClick={() => setCurrentImage(i)}
                 className={`h-16 w-24 flex-shrink-0 overflow-hidden rounded-lg transition-all ${i === currentImage ? "ring-2 ring-primary ring-offset-2" : "opacity-60 hover:opacity-100"}`}
               >
-                <img src={img} alt="" className="h-full w-full object-cover" />
+                <div className="relative h-full w-full">
+                  <Image src={img} alt="" fill className="object-cover" />
+                </div>
               </button>
             ))}
           </div>

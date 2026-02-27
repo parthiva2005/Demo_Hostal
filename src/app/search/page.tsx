@@ -3,8 +3,7 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Search, MapPin, SlidersHorizontal, Star, Heart, X, Wifi, UtensilsCrossed,
-  Car, Dumbbell, Wind, Tv, WashingMachine, ArrowUpDown, Grid3X3, List, ChevronDown
+  Search, MapPin, SlidersHorizontal, Star, X, ArrowUpDown, Grid3X3, List
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,6 +12,7 @@ import { Slider } from "@/components/ui/slider";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Link from "next/link";
+import Image from "next/image";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 
@@ -41,7 +41,7 @@ export default function SearchPage() {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
   const filteredPGs = useMemo(() => {
-    let results = allPGs.filter((pg) => {
+    const results = allPGs.filter((pg) => {
       const matchesSearch =
         !searchQuery ||
         pg.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -262,10 +262,11 @@ export default function SearchPage() {
                 >
                   <Link href={`/pg/${pg.id}`} className={viewMode === "list" ? "flex w-full" : "block"}>
                     <div className={`relative overflow-hidden ${viewMode === "list" ? "h-auto w-64 shrink-0" : "h-52"}`}>
-                      <img
+                      <Image
                         src={pg.image}
                         alt={pg.name}
-                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                       <div className="absolute left-3 top-3 flex gap-2">
                         <Badge className="bg-green-500 text-white">Verified</Badge>

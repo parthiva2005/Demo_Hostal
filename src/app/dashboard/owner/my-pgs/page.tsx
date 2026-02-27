@@ -4,6 +4,7 @@ import { Plus, Star, BedDouble } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
+import Image from "next/image";
 
 const myPGs = [
   { id: 1, name: "Sunshine Residency", location: "Madhapur, Hyderabad", totalBeds: 45, occupiedBeds: 38, rating: 4.8, revenue: 342000, status: "active", image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=300&h=200&fit=crop" },
@@ -25,7 +26,7 @@ export default function MyPGsPage() {
         {myPGs.map((pg) => (
           <div key={pg.id} className="overflow-hidden rounded-xl border bg-card text-card-foreground shadow-sm">
              <div className="h-48 w-full overflow-hidden">
-                <img src={pg.image} alt={pg.name} className="h-full w-full object-cover transition-transform hover:scale-105" />
+                <Image src={pg.image} alt={pg.name} fill className="object-cover transition-transform hover:scale-105" />
              </div>
              <div className="p-5">
                 <div className="flex items-start justify-between">
